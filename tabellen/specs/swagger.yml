@@ -1,0 +1,20 @@
+openapi: 3.0.3
+
+info:
+  title: Tabellen
+  version: 0.1.0
+
+paths:
+  /:
+    get:
+      operationId: api.hello
+      responses:
+        200:
+          description: Greeting
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
