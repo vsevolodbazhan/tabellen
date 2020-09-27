@@ -7,7 +7,7 @@ info:
 paths:
   /:
     get:
-      operationId: api.hello
+      operationId: tabellen.api.hello
       responses:
         200:
           description: Greeting
