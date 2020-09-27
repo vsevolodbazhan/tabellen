@@ -31,7 +31,7 @@ class Hook:
     def save(self):
         insert_or_replace(
             collection_name=COLLECTION_NAME,
-            _filter={"bot": self.bot},
+            query={"bot": self.bot},
             replacement=asdict(self),
         )
 
