@@ -2,7 +2,7 @@ from typing import Dict
 
 import requests
 
-from .client import Client
+from .clients import Client
 
 __all__ = ["send_event"]
 
