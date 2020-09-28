@@ -7,10 +7,6 @@ from .event import Event
 from .hooks import Hook, decode_callback_url
 
 
-def hello():
-    return {"message": "Hello!"}
-
-
 def send_message(body):
     bot_id, spreadsheet_id, column, range_start, range_end = (
         body["botId"],

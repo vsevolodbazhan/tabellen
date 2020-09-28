@@ -35,20 +35,6 @@ components:
             $ref: "#/components/schemas/Error"
 
 paths:
-  /:
-    get:
-      operationId: tabellen.api.hello
-      responses:
-        200:
-          description: Greeting
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-
   /send-message:
     post:
       operationId: tabellen.api.send_message
