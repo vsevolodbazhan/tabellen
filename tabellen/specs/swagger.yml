@@ -25,6 +25,15 @@ info:
         - rangeStart
         - rangeEnd
 
+components:
+  responses:
+    UnknownError:
+      description: Что-то пошло не так
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+
 paths:
   /:
     get:
@@ -65,6 +74,8 @@ paths:
           description: Сообщение отправлено
         424:
           description: Не найден вебхук для отправки сообщения
+        500:
+          $ref: "#/components/responses/UnknownError"
 
   /subscribe:
     post:
@@ -94,6 +105,10 @@ paths:
               responses:
                 200:
                   description: Все ок
+                500:
+                  $ref: "#/components/responses/UnknownError"
       responses:
         200:
           description: Подписка оформлена
+        500:
+          $ref: "#/components/responses/UnknownError"
