@@ -1,8 +1,9 @@
 from dataclasses import asdict, dataclass
+from typing import Optional
 
 import jwt
 
-from .storage import insert_or_replace
+from .storage import find, insert_or_replace
 
 COLLECTION_NAME = "hooks"
 
@@ -34,6 +35,13 @@ class Hook:
             query={"bot": self.bot},
             replacement=asdict(self),
         )
+
+    @staticmethod
+    def find_url_by_bot(bot: str) -> Optional[str]:
+        if document := find(collection_name=COLLECTION_NAME, query={"bot": bot}):
+            return document["url"]
+
+        return None
 
 
 def decode_callback_url(url: str, token_prefix: str = "microservice-event/") -> Hook:
