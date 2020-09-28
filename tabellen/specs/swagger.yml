@@ -3,6 +3,27 @@ openapi: 3.0.3
 info:
   title: Tabellen
   version: 0.1.0
+  x-config:
+    schema:
+      type: object
+      properties:
+        spreadsheetId:
+          type: string
+          description: Идентификатор Google Таблицы
+        column:
+          type: string
+          description: Столбец
+        rangeStart:
+          type: integer
+          description: Начало диапазона
+        rangeEnd:
+          type: integer
+          description: Конец диапазона
+      required:
+        - spreadsheetId
+        - column
+        - rangeStart
+        - rangeEnd
 
 paths:
   /:
@@ -18,6 +39,32 @@ paths:
                 properties:
                   message:
                     type: string
+
+  /send-message:
+    post:
+      operationId: tabellen.api.send_message
+      summary: Отправить сообщение
+      description: Отправить сообщение клиентам из Google Таблицы
+      tags:
+        - tomoru/action
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                botId:
+                  $ref: "https://api.tomoru.ru/openapi#/components/schemas/botId"
+                config:
+                  $ref: "https://api.tomoru.ru/openapi#/components/schemas/TomoruConfig"
+              required:
+                - botId
+                - config
+      responses:
+        200:
+          description: Сообщение отправлено
+        424:
+          description: Не найден вебхук для отправки сообщения
 
   /subscribe:
     post:
