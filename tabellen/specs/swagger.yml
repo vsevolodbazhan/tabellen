@@ -40,10 +40,6 @@ components:
   responses:
     UnknownError:
       description: Что-то пошло не так
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/Error"
 
 paths:
   /send-message:
