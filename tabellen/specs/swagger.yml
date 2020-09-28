@@ -18,3 +18,32 @@ paths:
                 properties:
                   message:
                     type: string
+
+  /subscribe:
+    post:
+      operationId: tabellen.api.subscribe
+      tags:
+        - tomoru/subscribe
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tomoruCallbackUrl:
+                  type: string
+              required:
+                - tomoruCallbackUrl
+      callbacks:
+        newMessage:
+          '{$request.body#/tomoruCallbackUrl}':
+            post:
+              summary: Новое сообщение
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                        $ref: 'https://api.tomoru.ru/openapi#/components/schemas/TomoruEvent'
+              responses:
+                200:
+                  description: Все ок
