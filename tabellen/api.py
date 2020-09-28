@@ -29,7 +29,7 @@ def send_message(body):
     )
     for client in clients:
         event = Event(_type=event_type, client=client)
-        event.send()
+        event.send(url=url)
 
     return NoContent, HTTPStatus.OK
 
