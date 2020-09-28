@@ -33,6 +33,9 @@ info:
         - rangeStart
         - rangeEnd
 
+servers:
+  - url: https://tomoru-tables.herokuapp.com
+
 components:
   responses:
     UnknownError:
