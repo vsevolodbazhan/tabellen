@@ -3,7 +3,7 @@ from http import HTTPStatus
 from connexion import NoContent
 
 from .clients import extract_clients
-from .event import Event
+from .events import Event
 from .hooks import Hook, decode_callback_url
 
 
