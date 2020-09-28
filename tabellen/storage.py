@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, Optional
 
 from .config import mongo
 
@@ -20,4 +20,9 @@ def insert_or_replace(collection_name: str, query: Dict, replacement: Dict) -> N
     """
 
     collection = db[collection_name]
-    collection.replace_one(query, replacement, upsert=True)
+    collection.replace_one(filter=query, replacement=replacement, upsert=True)
+
+
+def find(collection_name: str, query: Dict) -> Optional[Dict]:
+    collection = db[collection_name]
+    return collection.find_one(filter=query)
