@@ -1,50 +1,66 @@
+from dataclasses import dataclass
 from typing import Dict
 
 import requests
 
 from .clients import Client
 
-__all__ = ["send_event"]
+__all__ = ["Event"]
 
 
-def build_event_payload(event_type: str, client: Client) -> Dict[str, str]:
-    """Build a payload for Tomoru event.
+@dataclass
+class Event:
+    """An event that is being sent to Tomoru.
 
-    Build a payload compatible with `TomoruEvent` schema.
-    Schema: https://api.tomoru.ru/openapi#/components/schemas/TomoruEvent.
-
-    Args:
-        event_type (str): A type of an event.
-        client (Client): A client an event will be sent to.
-
-    Returns:
-        Dict[str, str]: The JSON payload in a form of a Python's `dict`.
+    Attributes:
+        _type (str): An event type.
+        client (Client): A Tomoru client.
 
     Examples:
-        >>> event_type = 'newMessage'
-        >>> client = Client('abc123', 'cde456')
-        >>> build_event_payload(event_type, client)
-        {'event': 'newMessage', 'botId': 'abc123', 'chatUri': 'id://cde456'}
+        >>> client = Client(bot='abc123', chat='cde456')
+        >>> event = Event(_type='newMessage', client=client)
+        >>> event
+        Event(_type='newMessage', client=Client(bot='abc123', chat='cde456'))
+        >>> event._type
+        'newMessage'
+        >>> event.client
+        Client(bot='abc123', chat='cde456')
     """
 
-    return {
-        "event": event_type,
-        "botId": client.bot,
-        "chatUri": f"id://{client.chat}",
-    }
+    _type: str
+    client: Client
 
+    @property
+    def payload(self) -> Dict[str, str]:
+        """Build a payload for Tomoru event.
 
-def send_event(event_type: str, target: str, client: Client) -> None:
-    """Send event to the given target URL.
+        Build a payload compatible with `TomoruEvent` schema.
+        Schema: https://api.tomoru.ru/openapi#/components/schemas/TomoruEvent.
 
-    Args:
-        event_type (str): A type of an event.
-        target (str): A URL an event will be sent to.
-        client (Client): A client an event will be sent to.
+        Returns:
+            Dict[str, str]: The JSON payload in a form of a Python's `dict`.
 
-    Returns:
-        None
-    """
+        Examples:
+            >>> client = Client(bot='abc123', chat='cde456')
+            >>> event = Event(_type='newMessage', client=client)
+            >>> event.payload
+            {'event': 'newMessage', 'botId': 'abc123', 'chatUri': 'id://cde456'}
+        """
 
-    payload = build_event_payload(event_type, client)
-    requests.post(target, json=payload)
+        return {
+            "event": self._type,
+            "botId": self.client.bot,
+            "chatUri": f"id://{self.client.chat}",
+        }
+
+    def send(self, url: str) -> None:
+        """Send event to the given target URL.
+
+        Args:
+            url (str): A URL an event will be sent to.
+
+        Returns:
+            None
+        """
+
+        requests.post(url, json=self.payload)
