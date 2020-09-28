@@ -24,5 +24,16 @@ def insert_or_replace(collection_name: str, query: Dict, replacement: Dict) -> N
 
 
 def find(collection_name: str, query: Dict) -> Optional[Dict]:
+    """Get an existing document.
+
+    Args:
+        collection_name (str): A collection name.
+        query (Dict): A query that matches the document to find.
+
+    Returns:
+        Dict: The document (if it exists).
+        None: if the document does not exist.
+    """
+
     collection = db[collection_name]
     return collection.find_one(filter=query)

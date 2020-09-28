@@ -29,7 +29,13 @@ class Hook:
     bot: str
     url: str
 
-    def save(self):
+    def save(self) -> None:
+        """Save this webhook to the database.
+
+        Returns:
+            None
+        """
+
         insert_or_replace(
             collection_name=COLLECTION_NAME,
             query={"bot": self.bot},
@@ -38,6 +44,16 @@ class Hook:
 
     @staticmethod
     def find_url_by_bot(bot: str) -> Optional[str]:
+        """Find callback URL by a bot ID.
+
+        Args:
+            bot (str): A bot ID.
+
+        Returns:
+            str: A callback URL.
+            None: if no callback URL corresponds to the given bot ID.
+        """
+
         if document := find(collection_name=COLLECTION_NAME, query={"bot": bot}):
             return document["url"]
 
