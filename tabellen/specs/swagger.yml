@@ -16,9 +16,9 @@ info:
     schema:
       type: object
       properties:
-        spreadsheetId:
+        spreadsheetUrl:
           type: string
-          description: Идентификатор Google Таблицы
+          description: Ссылка на Google Таблицу
         column:
           type: string
           description: Столбец

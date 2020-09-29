@@ -5,17 +5,19 @@ from connexion import NoContent
 from .clients import extract_clients
 from .events import Event
 from .hooks import Hook, decode_callback_url
+from .sheets import retrieve_id
 
 
 def send_message(body):
-    bot_id, spreadsheet_id, column, range_start, range_end, message = (
+    bot_id, spreadsheet_url, column, range_start, range_end, message = (
         body["botId"],
-        body["config"]["spreadsheetId"],
+        body["config"]["spreadsheetUrl"],
         body["config"]["column"],
         body["config"]["rangeStart"],
         body["config"]["rangeEnd"],
         body["config"]["message"],
     )
+    spreadsheet_id = retrieve_id(url=spreadsheet_url)
 
     url = Hook.find_url_by_bot(bot=bot_id)
     if url is None:

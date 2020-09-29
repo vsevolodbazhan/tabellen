@@ -6,6 +6,8 @@ import apiclient.discovery
 import httplib2
 from oauth2client.service_account import ServiceAccountCredentials
 
+from .utils import read_between
+
 __all__ = ["extract_values"]
 
 CREDENTIALS_FILE = "credentials.json"
@@ -78,3 +80,10 @@ def extract_values(
 
     values = data.get("values")
     return values[0]
+
+
+def retrieve_id(url: str) -> str:
+    prefix, postfix = "d/", "/edit"
+    if bot := read_between(value=url, prefix=prefix, postfix=postfix):
+        return bot
+    raise ValueError(f"Could not retrieve a spreadsheet ID from: {url}")
