@@ -1,7 +1,7 @@
 openapi: 3.0.3
 
 info:
-  title: Сообщения (Google Таблицы)
+  title: Рассылка (Google Таблицы)
   version: 0.1.0
   description: |
     Микросервис для отправки сообщений клиентам из Google Таблицы.
