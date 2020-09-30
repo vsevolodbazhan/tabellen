@@ -9,13 +9,12 @@ from .sheets import retrieve_id
 
 
 def send_message(body):
-    bot_id, spreadsheet_url, column, range_start, range_end, message = (
+    bot_id, spreadsheet_url, column, range_start, range_end = (
         body["botId"],
         body["config"]["spreadsheetUrl"],
         body["config"]["column"],
         body["config"]["rangeStart"],
         body["config"]["rangeEnd"],
-        body["config"]["message"],
     )
     spreadsheet_id = retrieve_id(url=spreadsheet_url)
 
@@ -24,7 +23,6 @@ def send_message(body):
         return NoContent, HTTPStatus.FAILED_DEPENDENCY
 
     event_type = "newMessage"
-    event_data = {"message": message}
     clients = extract_clients(
         spreadsheet_id=spreadsheet_id,
         column=column,
@@ -32,7 +30,7 @@ def send_message(body):
         range_end=range_end,
     )
     for client in clients:
-        event = Event(_type=event_type, data=event_data, client=client)
+        event = Event(_type=event_type, client=client)
         event.send(url=url)
 
     return NoContent, HTTPStatus.OK
