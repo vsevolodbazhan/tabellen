@@ -12,3 +12,6 @@ __pycache__
 
 # Sheets API
 credentials.json
+
+# Coverage
+.coverage
