@@ -2,6 +2,8 @@ from typing import Dict, Optional
 
 from .config import mongo
 
+__all__ = ["insert_or_replace", "find"]
+
 db = mongo.db
 
 

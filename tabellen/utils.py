@@ -1,5 +1,7 @@
 from typing import Optional
 
+__all__ = ["read_between"]
+
 
 def read_between(value: str, prefix: str, postfix: str) -> Optional[str]:
     """Read a sequence between given prefix and postfix.

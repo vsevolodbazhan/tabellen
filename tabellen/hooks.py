@@ -5,6 +5,8 @@ import jwt
 
 from .storage import find, insert_or_replace
 
+__all__ = ["Hook", "decode_callback_url"]
+
 COLLECTION_NAME = "hooks"
 
 

@@ -2,7 +2,7 @@ import json
 import os
 from typing import List
 
-import apiclient.discovery
+import googleapiclient.discovery
 import httplib2
 from oauth2client.service_account import ServiceAccountCredentials
 
@@ -39,7 +39,7 @@ def setup_service(credentials_file: str = CREDENTIALS_FILE):
             credentials_data, apis_list
         )
     httpAuth = credentials.authorize(httplib2.Http())
-    service = apiclient.discovery.build("sheets", "v4", http=httpAuth)
+    service = googleapiclient.discovery.build("sheets", "v4", http=httpAuth)
     return service
 
 
