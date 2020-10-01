@@ -81,14 +81,14 @@ def retrieve_chat(value: str) -> str:
     Examples:
         >>> retrieve_chat('chats/abc";')
         'abc'
-        >>> retrieve_bot('chats/abc')
+        >>> retrieve_chat('chats/abc')
         Traceback (most recent call last):
             ...
-        ValueError: Could not retrieve a bot ID from: chats/abc
-        >>> retrieve_bot('/abc";')
+        ValueError: Could not retrieve a chat ID from: chats/abc
+        >>> retrieve_chat('/abc";')
         Traceback (most recent call last):
             ...
-        ValueError: Could not retrieve a bot ID from: /abc";
+        ValueError: Could not retrieve a chat ID from: /abc";
     """
 
     prefix, postfix = "chats/", '";'
