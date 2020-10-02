@@ -56,14 +56,14 @@ class Event:
             "chatUri": f"id://{self.client.chat}",
         }
 
-    def send(self, url: str) -> None:
+    def send(self, url: str) -> requests.Response:
         """Send event to the given target URL.
 
         Args:
             url (str): A URL an event will be sent to.
 
         Returns:
-            None
+            requests.Response
         """
 
-        requests.post(url, json=self.payload)
+        return requests.post(url, json=self.payload)
