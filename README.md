@@ -1,7 +1,5 @@
 # Tabellen
 
-[![Build Status](https://travis-ci.com/vsevolodbazhan/tabellen.svg?branch=master)](https://travis-ci.com/vsevolodbazhan/tabellen)
-[![codecov](https://codecov.io/gh/vsevolodbazhan/tabellen/branch/master/graph/badge.svg)](https://codecov.io/gh/vsevolodbazhan/tabellen)
 [![CodeFactor](https://www.codefactor.io/repository/github/vsevolodbazhan/tabellen/badge)](https://www.codefactor.io/repository/github/vsevolodbazhan/tabellen)
 [![Requirements Status](https://requires.io/github/vsevolodbazhan/tabellen/requirements.svg?branch=master)](https://requires.io/github/vsevolodbazhan/tabellen/requirements/?branch=master)
 
