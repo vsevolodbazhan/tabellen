@@ -95,18 +95,7 @@ paths:
                 content:
                   application/json:
                     schema:
-                      allOf:
-                        - $ref: "https://api.tomoru.ru/openapi#/components/schemas/TomoruEvent"
-                        - type: object
-                          properties:
-                            data:
-                              type: object
-                              properties:
-                                message:
-                                  type: string
-                                  description: Текст сообщения
-                              required:
-                                - message
+                      $ref: "https://api.tomoru.ru/openapi#/components/schemas/TomoruEvent"
               responses:
                 200:
                   description: Все ок
