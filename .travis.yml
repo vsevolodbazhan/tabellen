@@ -1,15 +1,12 @@
 language: python
 python: 3.8
 
-before_install:
-  - pip install poetry
-
 install:
-  - poetry install
+  - pip install -r requirements.txt
 
 script:
-  - poetry run flake8
-  - poetry run pytest --cov=.
+  - flake8
+  - pytest --cov=.
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
