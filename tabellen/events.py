@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any, Dict
 
 from .clients import Client
@@ -31,7 +31,7 @@ class Event:
 
     _type: str
     client: Client
-    data: Dict[str, Any] = {}
+    data: Dict[str, Any] = field(default_factory=dict)
 
     @property
     def payload(self) -> Dict[str, Any]:
