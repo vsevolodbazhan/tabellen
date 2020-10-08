@@ -2,7 +2,7 @@ openapi: 3.0.3
 
 info:
   title: Рассылка (Google Таблицы)
-  version: 0.2.1
+  version: 0.3.1
   description: |
     Микросервис для отправки сообщений клиентам из Google Таблицы.
 
@@ -71,6 +71,34 @@ paths:
         500:
           $ref: "#/components/responses/UnknownError"
 
+  /send-later:
+    post:
+      operationId: tabellen.api.send_later
+      summary: Отправить отложенное сообщение
+      description: Отправить отложенное сообщение клиенту
+      tags:
+        - tomoru/call
+      requestBody:
+        application/json:
+          schema:
+            type: object
+            botId:
+              $ref: "https://api.tomoru.ru/openapi#/components/schemas/botId"
+            chatId:
+              $ref: "https://api.tomoru.ru/openapi#/components/schemas/chatId"
+            message:
+              type: string
+              description: Текст сообщения
+            delay:
+              type: int
+              description: Задержка в минутах
+        202:
+          description: Сообщение запланировано
+        424:
+          description: Не найден вебхук для отправки сообщения
+        500:
+          $ref: "#/components/responses/UnknownError"
+
   /subscribe:
     post:
       operationId: tabellen.api.subscribe
@@ -95,7 +123,16 @@ paths:
                 content:
                   application/json:
                     schema:
-                      $ref: "https://api.tomoru.ru/openapi#/components/schemas/TomoruEvent"
+                      allOf:
+                        - $ref: 'https://api.tomoru.ru/openapi#/components/schemas/TomoruEvent'
+                        - type: object
+                          properties:
+                            data:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  description: Текст сообщения
               responses:
                 200:
                   description: Все ок

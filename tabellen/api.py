@@ -2,7 +2,7 @@ from http import HTTPStatus
 
 from connexion import NoContent
 
-from .clients import extract_clients
+from .clients import Client, extract_clients
 from .events import Event
 from .hooks import Hook, decode_callback_url
 from .sheets import retrieve_id
@@ -34,6 +34,26 @@ def send_now(body):
     for client in clients:
         event = Event(_type=event_type, client=client)
         event.send(url=url)
+
+    return NoContent, HTTPStatus.OK
+
+
+def send_later(body):
+    bot_id, chat_id, message, delay = (
+        body["botId"],
+        body["chatId"],
+        body["message"],
+        body["delay"],
+    )
+
+    url = Hook.find_url_by_bot(bot=bot_id)
+    if url is None:
+        return NoContent, HTTPStatus.FAILED_DEPENDENCY
+
+    client = Client(bot=bot_id, chat=chat_id)
+    event_type = "newMessage"
+    event = Event(_type=event_type, client=client, data={"message": message})
+    event.send(url, delay)
 
     return NoContent, HTTPStatus.OK
 
