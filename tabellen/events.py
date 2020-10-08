@@ -31,7 +31,7 @@ class Event:
 
     _type: str
     client: Client
-    data: Dict[str, Any]
+    data: Dict[str, Any] = {}
 
     @property
     def payload(self) -> Dict[str, Any]:
