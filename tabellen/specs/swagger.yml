@@ -108,6 +108,8 @@ paths:
                   messageId:
                     type: string
                     description: Идентификатор сообщения
+                required:
+                  - messageId
         424:
           description: Не найден вебхук для отправки сообщения
         500:
