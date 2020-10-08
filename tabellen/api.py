@@ -9,6 +9,8 @@ from .sheets import retrieve_id
 
 __all__ = ["send_now", "subscribe"]
 
+SECONDS_IN_MINUTE = 60
+
 
 def send_now(body):
     bot_id, spreadsheet_url, column, range_start, range_end = (
@@ -53,7 +55,7 @@ def send_later(body):
     client = Client(bot=bot_id, chat=chat_id)
     event_type = "newMessage"
     event = Event(_type=event_type, client=client, data={"message": message})
-    event.send(url, delay * 60)
+    event.send(url, delay * SECONDS_IN_MINUTE)
 
     return NoContent, HTTPStatus.OK
 
