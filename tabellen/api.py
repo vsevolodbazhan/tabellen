@@ -53,7 +53,7 @@ def send_later(body):
     client = Client(bot=bot_id, chat=chat_id)
     event_type = "newMessage"
     event = Event(_type=event_type, client=client, data={"message": message})
-    event.send(url, delay)
+    event.send(url, delay * 60)
 
     return NoContent, HTTPStatus.OK
 
