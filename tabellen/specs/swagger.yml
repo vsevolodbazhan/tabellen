@@ -79,19 +79,22 @@ paths:
       tags:
         - tomoru/call
       requestBody:
-        application/json:
-          schema:
-            type: object
-            botId:
-              $ref: "https://api.tomoru.ru/openapi#/components/schemas/botId"
-            chatId:
-              $ref: "https://api.tomoru.ru/openapi#/components/schemas/chatId"
-            message:
-              type: string
-              description: Текст сообщения
-            delay:
-              type: int
-              description: Задержка в минутах
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                botId:
+                  $ref: "https://api.tomoru.ru/openapi#/components/schemas/botId"
+                chatId:
+                  $ref: "https://api.tomoru.ru/openapi#/components/schemas/chatId"
+                message:
+                  type: string
+                  description: Текст сообщения
+                delay:
+                  type: integer
+                  description: Задержка в минутах
+      responses:
         202:
           description: Сообщение запланировано
         424:
