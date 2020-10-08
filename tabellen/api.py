@@ -49,9 +49,6 @@ def send_later(body):
     )
 
     url = Hook.find_url_by_bot(bot=bot_id)
-    if url is None:
-        return NoContent, HTTPStatus.FAILED_DEPENDENCY
-
     client = Client(bot=bot_id, chat=chat_id)
     event_type = "newMessage"
     event = Event(_type=event_type, client=client, data={"message": message})
