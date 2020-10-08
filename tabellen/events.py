@@ -15,18 +15,24 @@ class Event:
     Attributes:
         _type (str): An event type.
         client (Client): A Tomoru client.
+        data (Dict[str, Any]): An additional data that
+        will be send with an event.
 
     Examples:
         >>> client = Client(bot='abc123', chat='cde456')
-        >>> event = Event(_type='newMessage', client=client)
+        >>> data = {'message': 'Hello!'}
+        >>> event = Event(_type='newMessage', client=client, data=data)
         >>> event._type
         'newMessage'
         >>> event.client
         Client(bot='abc123', chat='cde456')
+        >>> event.data
+        {'message': 'Hello!'}
     """
 
     _type: str
     client: Client
+    data: Dict[str, Any]
 
     @property
     def payload(self) -> Dict[str, Any]:
@@ -40,7 +46,8 @@ class Event:
 
         Examples:
             >>> client = Client(bot='abc123', chat='cde456')
-            >>> event = Event(_type='newMessage', client=client)
+            >>> data = {'message': 'Hello!'}
+            >>> event = Event(_type='newMessage', client=client, data=data)
             >>> payload = event.payload
             >>> payload['event']
             'newMessage'
@@ -48,12 +55,15 @@ class Event:
             'abc123'
             >>> payload['chatUri']
             'id://cde456'
+            >>> payload['data']
+            {'message': 'Hello!'}
         """
 
         return {
             "event": self._type,
             "botId": self.client.bot,
             "chatUri": f"id://{self.client.chat}",
+            "data": self.data,
         }
 
     def send(self, url: str) -> requests.Response:

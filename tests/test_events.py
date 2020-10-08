@@ -10,7 +10,8 @@ def test_send():
     httpretty.register_uri(httpretty.POST, url, body=body)
 
     client = Client(bot="abc123", chat="cde456")
-    event = Event(_type="test", client=client)
+    data = {"message": "Hello!"}
+    event = Event(_type="test", client=client, data=data)
     response = event.send(url=url)
 
     assert response.ok
