@@ -94,6 +94,9 @@ paths:
                 delay:
                   type: integer
                   description: Задержка в минутах
+              required:
+                - message
+                - delay
       responses:
         202:
           description: Сообщение запланировано
