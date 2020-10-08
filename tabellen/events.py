@@ -75,4 +75,5 @@ class Event:
             requests.Response
         """
 
-        return send_request.apply_async((url, self.payload), countdown=delay)
+        task = send_request.apply_async((url, self.payload), countdown=delay)
+        return task.id
