@@ -7,10 +7,10 @@ from .events import Event
 from .hooks import Hook, decode_callback_url
 from .sheets import retrieve_id
 
-__all__ = ["send_message", "subscribe"]
+__all__ = ["send_now", "subscribe"]
 
 
-def send_message(body):
+def send_now(body):
     bot_id, spreadsheet_url, column, range_start, range_end = (
         body["botId"],
         body["config"]["spreadsheetUrl"],

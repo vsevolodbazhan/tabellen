@@ -43,9 +43,9 @@ components:
       description: Что-то пошло не так
 
 paths:
-  /send-message:
+  /send-now:
     post:
-      operationId: tabellen.api.send_message
+      operationId: tabellen.api.send_now
       summary: Отправить сообщение
       description: Отправить сообщение клиентам из Google Таблицы
       tags:
