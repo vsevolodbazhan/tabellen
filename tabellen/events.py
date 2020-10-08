@@ -1,9 +1,8 @@
 from dataclasses import dataclass
 from typing import Any, Dict
 
-import requests
-
 from .clients import Client
+from .tasks import Response, send_request
 
 __all__ = ["Event"]
 
@@ -66,7 +65,7 @@ class Event:
             "data": self.data,
         }
 
-    def send(self, url: str) -> requests.Response:
+    def send(self, url: str, delay: int = 1) -> Response:
         """Send event to the given target URL.
 
         Args:
@@ -76,4 +75,4 @@ class Event:
             requests.Response
         """
 
-        return requests.post(url, json=self.payload)
+        return send_request.apply_async((url, self.payload), countdown=delay)
