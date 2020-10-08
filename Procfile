@@ -1,2 +1,2 @@
 web: gunicorn app:connexion_app
-tasks: celery -A tabellen.config.celery worker
+tasks: celery -A tabellen.tasks worker
