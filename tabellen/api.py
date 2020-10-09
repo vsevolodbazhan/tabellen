@@ -11,6 +11,7 @@ from .tasks import revoke_task
 __all__ = ["send_now", "subscribe"]
 
 SECONDS_IN_MINUTE = 60
+NEW_MESSAGE_EVENT_TYPE = "newMessage"
 
 
 def send_now(body):
@@ -24,10 +25,7 @@ def send_now(body):
     spreadsheet_id = retrieve_id(url=spreadsheet_url)
 
     url = Hook.find_url_by_bot(bot=bot_id)
-    if url is None:
-        return NoContent, HTTPStatus.FAILED_DEPENDENCY
 
-    event_type = "newMessage"
     clients = extract_clients(
         spreadsheet_id=spreadsheet_id,
         column=column,
@@ -35,7 +33,7 @@ def send_now(body):
         range_end=range_end,
     )
     for client in clients:
-        event = Event(_type=event_type, client=client)
+        event = Event(_type=NEW_MESSAGE_EVENT_TYPE, client=client)
         event.send(url=url)
 
     return NoContent, HTTPStatus.OK
@@ -51,11 +49,12 @@ def send_later(body):
 
     url = Hook.find_url_by_bot(bot=bot_id)
     client = Client(bot=bot_id, chat=chat_id)
-    event_type = "newMessage"
-    event = Event(_type=event_type, client=client, data={"message": message})
-    task_id = event.send(url, delay * SECONDS_IN_MINUTE)
+    event = Event(
+        _type=NEW_MESSAGE_EVENT_TYPE, client=client, data={"message": message}
+    )
+    event_id = event.send(url, delay * SECONDS_IN_MINUTE)
 
-    return {"messageId": task_id}, HTTPStatus.OK
+    return {"messageId": event_id}, HTTPStatus.OK
 
 
 def cancel_event(body):

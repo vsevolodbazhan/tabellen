@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 from typing import Any, Dict
 
 from .clients import Client
-from .tasks import Response, send_request
+from .tasks import send_request
 
 __all__ = ["Event"]
 
@@ -65,14 +65,15 @@ class Event:
             "data": self.data,
         }
 
-    def send(self, url: str, delay: int = 1) -> Response:
+    def send(self, url: str, delay: int = 0) -> str:
         """Send event to the given target URL.
 
         Args:
-            url (str): A URL an event will be sent to.
+            url (str): A URL the event will be sent to.
+            delay (int): A delay in minutes after which the event will be sent.
 
         Returns:
-            requests.Response
+            str: A ID of the event.
         """
 
         task = send_request.apply_async((url, self.payload), countdown=delay)

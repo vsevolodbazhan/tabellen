@@ -12,10 +12,11 @@ def test_send():
     client = Client(bot="abc123", chat="cde456")
     data = {"message": "Hello!"}
     event = Event(_type="test", client=client, data=data)
-    response = event.send(url=url)
+    event_id = event.send(url=url)
 
-    assert response.ok
-    assert response.text == body
+    # Assert that `event.send` returns an ID of a Celery task.
+    assert isinstance(event_id, str)
+    assert len(event_id) == 36
 
     httpretty.disable()
     httpretty.reset()
