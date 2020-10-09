@@ -6,6 +6,7 @@ from .clients import Client, extract_clients
 from .events import Event
 from .hooks import Hook, decode_callback_url
 from .sheets import retrieve_id
+from .tasks import revoke_task
 
 __all__ = ["send_now", "subscribe"]
 
@@ -55,6 +56,14 @@ def send_later(body):
     task_id = event.send(url, delay * SECONDS_IN_MINUTE)
 
     return {"messageId": task_id}, HTTPStatus.OK
+
+
+def cancel_event(body):
+    message_id = body["messageId"]
+
+    revoke_task(message_id)
+
+    return NoContent, HTTPStatus.NO_CONTENT
 
 
 def subscribe(body):

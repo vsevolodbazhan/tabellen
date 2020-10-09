@@ -113,6 +113,30 @@ paths:
         500:
           $ref: "#/components/responses/UnknownError"
 
+  /cancel-message:
+    post:
+      operationId: tabellen.api.cancel_event
+      summary: Отменить сообщение
+      description: Отменить отправку отложенного сообщения
+      tags:
+        - tomoru/call
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                messageId:
+                  type: string
+                  description: Идентификатор сообщения
+              required:
+                - messageId
+      responses:
+        204:
+          description: Отправка отменена
+        500:
+          $ref: "#/components/responses/UnknownError"
+
   /subscribe:
     post:
       operationId: tabellen.api.subscribe
