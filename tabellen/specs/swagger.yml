@@ -66,8 +66,6 @@ paths:
       responses:
         200:
           description: Сообщение отправлено
-        424:
-          description: Не найден вебхук для отправки сообщения
         500:
           $ref: "#/components/responses/UnknownError"
 
