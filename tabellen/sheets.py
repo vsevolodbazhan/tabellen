@@ -1,20 +1,17 @@
 import json
-import os
 from typing import List
 
 import googleapiclient.discovery
 import httplib2
 from oauth2client.service_account import ServiceAccountCredentials
 
+from .settings import settings
 from .utils import read_between
 
 __all__ = ["extract_values"]
 
-CREDENTIALS_FILE = "credentials.json"
-CREDENTIALS_NAME = "SHEETS_API_CREDS"
 
-
-def setup_service(credentials_file: str = CREDENTIALS_FILE):
+def setup_service(credentials_file: str = settings.SHEETS_CREDENTIALS_FILE):
     """Setup a Google Shreadsheets service.
 
     Args:
@@ -34,7 +31,7 @@ def setup_service(credentials_file: str = CREDENTIALS_FILE):
             credentials_file, apis_list
         )
     except FileNotFoundError:
-        credentials_data = json.loads(os.environ[CREDENTIALS_NAME])
+        credentials_data = json.loads(settings.SHEETS_CREDENTIALS_JSON)
         credentials = ServiceAccountCredentials.from_json_keyfile_dict(
             credentials_data, apis_list
         )
