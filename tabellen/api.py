@@ -25,7 +25,6 @@ def send_now(body):
     spreadsheet_id = retrieve_id(url=spreadsheet_url)
 
     url = Hook.find_url_by_bot(bot=bot_id)
-
     clients = extract_clients(
         spreadsheet_id=spreadsheet_id,
         column=column,
@@ -52,9 +51,9 @@ def send_later(body):
     event = Event(
         _type=NEW_MESSAGE_EVENT_TYPE, client=client, data={"message": message}
     )
-    event_id = event.send(url, delay * SECONDS_IN_MINUTE)
+    message_id = event.send(url, delay * SECONDS_IN_MINUTE)
 
-    return {"messageId": event_id}, HTTPStatus.OK
+    return {"messageId": message_id}, HTTPStatus.OK
 
 
 def cancel_event(body):
