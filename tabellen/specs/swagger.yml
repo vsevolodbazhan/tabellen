@@ -19,15 +19,20 @@ info:
         spreadsheetUrl:
           type: string
           description: Ссылка на Google Таблицу
+          minLength: 1
+          format: uri
         column:
           type: string
           description: Столбец
+          minLength: 1
         rangeStart:
           type: integer
           description: Начало диапазона
+          minimum: 1
         rangeEnd:
           type: integer
           description: Конец диапазона
+          minimum: 1
       required:
         - spreadsheetId
         - column
@@ -89,9 +94,11 @@ paths:
                 message:
                   type: string
                   description: Текст сообщения
+                  minLength: 1
                 delay:
                   type: integer
                   description: Задержка в минутах
+                  minimum: 0
               required:
                 - message
                 - delay
@@ -127,6 +134,7 @@ paths:
                 messageId:
                   type: string
                   description: Идентификатор сообщения
+                  minLength: 1
               required:
                 - messageId
       responses:
@@ -148,6 +156,8 @@ paths:
               properties:
                 tomoruCallbackUrl:
                   type: string
+                  minLength: 1
+                  format: uri
               required:
                 - tomoruCallbackUrl
       callbacks:
