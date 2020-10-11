@@ -8,7 +8,7 @@ from .hooks import Hook, decode_callback_url
 from .sheets import retrieve_id
 from .tasks import revoke_task
 
-__all__ = ["send_now", "subscribe"]
+__all__ = ["send_now", "send_later", "cancel_event", "subscribe"]
 
 SECONDS_IN_MINUTE = 60
 NEW_MESSAGE_EVENT_TYPE = "newMessage"
