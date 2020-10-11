@@ -26,7 +26,13 @@ Poetry will install dev-dependencies as well. So use that if you are planning to
 Run the server:
 
 ```bash
-gunicorn config.wsgi
+gunicorn app:connexion_app
+```
+
+and run the Celery worker in the separate process:
+
+```bash
+celery -A tabellen.tasks worker
 ```
 
 You might want to activate shell first with:
