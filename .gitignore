@@ -16,3 +16,6 @@ credentials.json
 # Coverage
 .coverage
 htmlcov
+
+# Env
+.env
