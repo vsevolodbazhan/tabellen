@@ -79,8 +79,34 @@ def extract_values(
     return values[0]
 
 
-def retrieve_id(url: str) -> str:
-    prefix, postfix = "d/", "/edit"
-    if bot := read_between(value=url, prefix=prefix, postfix=postfix):
-        return bot
+def retrieve_id(url: str, prefix: str = "d/", postfix: str = "/edit") -> str:
+    """Get the spreadsheet ID from its URL.
+
+    Parse the Google Spreadsheet URL and get
+    the spreadsheet ID.
+
+    Args:
+        url (str): The spreadsheet URL.
+        prefix (str): A prefix after which an ID starts.
+        postfix (str): A postfix before which an ID.
+
+    Returns:
+        str: The retireved ID.
+
+    Raises:
+        ValueError: If an ID could not be retrieved.
+
+    Examples:
+        >>> url = 'https://docs.google.com/spreadsheets/d/abc123/edit?usp=sharing'
+        >>> retrieve_id(url)
+        'abc123'
+        >>> url = 'some_random_string'
+        >>> retrieve_id(url)
+        Traceback (most recent call last):
+            ...
+        ValueError: Could not retrieve a spreadsheet ID from: some_random_string
+    """
+
+    if _id := read_between(value=url, prefix=prefix, postfix=postfix):
+        return _id
     raise ValueError(f"Could not retrieve a spreadsheet ID from: {url}")
