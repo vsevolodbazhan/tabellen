@@ -41,22 +41,22 @@ You might want to activate shell first with:
 poetry shell
 ```
 
+## Docs
+
+Docs can be found in `docs` folder.
+
+To generate the new docs use:
+
+```
+make docs
+```
+
 ## Tests
 
 Run tests using `pytest`:
 
 ```bash
 make test
-```
-
-## Docs
-
-Docs can be found in `docs` folder.
-
-Too generate new docs use:
-
-```
-make docs
 ```
 
 ## License
