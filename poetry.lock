@@ -996,8 +996,8 @@ watchdog = ["watchdog"]
 
 [metadata]
 lock-version = "1.1"
-python-versions = "^3.8"
-content-hash = "9f6eac13f48cf4f9acf69e19ed6b959d60c32daf6546ea45fd7c2980abe89a62"
+python-versions = "^3.9"
+content-hash = "20c281e5c534f4b38ed6541ec17dca398b37b80e855f32bc80b35b5690a768cf"
 
 [metadata.files]
 amqp = [
