@@ -26,13 +26,13 @@ Poetry will install dev-dependencies as well. So use that if you are planning to
 Run the server:
 
 ```bash
-gunicorn app:connexion_app
+make run_server
 ```
 
 and run the Celery worker in the separate process:
 
 ```bash
-celery -A tabellen.tasks worker
+make run_celery
 ```
 
 You might want to activate shell first with:
@@ -45,8 +45,18 @@ poetry shell
 
 Run tests using `pytest`:
 
+```bash
+make test
 ```
-pytest --cov=.
+
+## Docs
+
+Docs can be found in `docs` folder.
+
+Too generate new docs use:
+
+```
+make docs
 ```
 
 ## License
