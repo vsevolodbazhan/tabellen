@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "Tabellen"
-version = "0.3.1"
+version = "0.3.2"
 description = "A microservice for sending messages to clients from Google Sheets."
 authors = ["Vsevolod Bazhan <vsevozhan@yandex.ru>"]
 
